@@ -1,4 +1,3 @@
-using Moq;
 using PromotionEngine.Service.AutoPromotion.Controllers;
 using PromotionEngine.Service.AutoPromotion.Promotion;
 using System.Collections.Generic;
@@ -9,13 +8,11 @@ namespace PromotionEngine.Service.AutoPromotion_uTest.Controllers
 {
     public class PromoControllerTest
     {
-        private readonly Mock<IPromoFactory> mockPromoFactory;
         private readonly PromoController myPromoController;
 
         public PromoControllerTest()
         {
-            mockPromoFactory = new Mock<IPromoFactory>();
-            myPromoController = new PromoController(mockPromoFactory.Object);
+            myPromoController = new PromoController(new PromoFactory());
         }
 
         [Theory]

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace PromotionEngine.Service.AutoPromotion.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class PromoController : ControllerBase
     {
@@ -19,14 +18,15 @@ namespace PromotionEngine.Service.AutoPromotion.Controllers
         }
 
         [HttpGet]
+        [Route("api/promo")]
         public async Task<double> GetFinalPrice([FromBody] Dictionary<string, int> cartOrder)
         {
             var finalPrice = 0.0;
             foreach (var item in cartOrder)
             {
                 myPromotion = myPromoFactory.CreateInstance((Items)Enum.Parse(typeof(Items), item.Key));
-                if (myPromotion is null) continue;
-                finalPrice += await myPromotion.ApplyProductPromotionAsync(item.Value);
+                if (myPromotion != null)
+                    finalPrice += await myPromotion.ApplyProductPromotionAsync(item.Value);
             }
 
             return finalPrice;
