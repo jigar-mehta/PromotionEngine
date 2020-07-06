@@ -8,7 +8,10 @@ namespace PromotionEngine.Service.AutoPromotion.Promotion
         {
             switch (items)
             {
-                
+                case Items.A: return new PromoForA();
+                case Items.B: return new PromoForB();
+                case Items.C: return new PromoForC();
+                case Items.D: return new PromoForD();
                 default: return (IPromotion)null;
             }
         }
