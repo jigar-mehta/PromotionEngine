@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PromotionEngine.Service.AutoPromotion.Promotion;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace PromotionEngine.Service.AutoPromotion.Controllers
 {
@@ -11,15 +10,26 @@ namespace PromotionEngine.Service.AutoPromotion.Controllers
     [ApiController]
     public class PromoController : ControllerBase
     {
-        public PromoController()
-        {
+        private readonly IPromoFactory myPromoFactory;
+        private IPromotion myPromotion;
 
+        public PromoController(IPromoFactory promoFactory)
+        {
+            myPromoFactory = promoFactory;
         }
 
         [HttpGet]
-        public string GetFinalPrice([FromBody] Dictionary<string, int> cartOrder)
+        public async Task<double> GetFinalPrice([FromBody] Dictionary<string, int> cartOrder)
         {
-            return string.Empty;
+            var finalPrice = 0.0;
+            foreach (var item in cartOrder)
+            {
+                myPromotion = myPromoFactory.CreateInstance((Items)Enum.Parse(typeof(Items), item.Key));
+                if (myPromotion is null) continue;
+                finalPrice += await myPromotion.ApplyProductPromotionAsync(item.Value);
+            }
+
+            return finalPrice;
         }
 
     }

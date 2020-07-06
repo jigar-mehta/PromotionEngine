@@ -4,3 +4,12 @@
 
 /Source/PromotionEngine.Service.AutoPromotion/obj
 /Test/PromotionEngine.Service.AutoPromotion_uTest/obj
+/.vs
+/Source/PromotionEngine.App/bin/Debug/netcoreapp3.1
+/Source/PromotionEngine.App/obj
+/Source/PromotionEngine.Lib/bin/Debug/netcoreapp3.1
+/Source/PromotionEngine.Lib/obj/Debug/netcoreapp3.1
+/Source/PromotionEngine.Lib/obj
+/Test/PromotionEngine.Lib_uTest/bin/Debug/netcoreapp3.1
+/Test/PromotionEngine.Lib_uTest/obj
+/Test/PromotionEngine.Service.AutoPromotion_uTest/bin/Debug/netcoreapp3.1
